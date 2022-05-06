@@ -1,7 +1,8 @@
 import { Component } from 'react';
-import './App.css';
-import Grandparent from './components/Grandparent';
 import { UserContext } from './contexts';
+import './App.css';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 /*
   1. создать контекст -  React.createContext
   2. в контекст надо положить данные - Provider
@@ -20,11 +21,10 @@ class App extends Component {
   };
 
   render() {
-    console.log(UserContext);
-
     return (
       <UserContext.Provider value={this.state.user}>
-        <Grandparent  />
+        <Header />
+        <Sidebar />
       </UserContext.Provider>
     );
   }
