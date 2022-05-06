@@ -5,7 +5,7 @@ import { UserContext } from './contexts';
 /*
   1. создать контекст -  React.createContext
   2. в контекст надо положить данные - Provider
-  3. данные надо достать там где надо - 
+  3. данные надо достать там где надо - Consumer
 */
 
 class App extends Component {
