@@ -1,28 +1,39 @@
 import React from 'react';
-import { UserContext } from '../../contexts';
+import cx from 'classnames';
+import { UserContext, ThemeContext } from '../../contexts';
+import styles from './Header.module.scss';
+import CONSTANTS from '../../constants';
 
 const Header = () => {
   return (
-    <UserContext.Consumer>
-      {(userData) => (
-        <header
-          style={{
-            border: '2px solid',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '10px',
-          }}
-        >
-          <h1>MY SITE</h1>
-          <img
-            alt="user"
-            style={{ height: '64px', width: '64px' }}
-            src={userData.pictureSrc}
-          />
-        </header>
-      )}
-    </UserContext.Consumer>
+    <ThemeContext.Consumer>
+      {([theme, setTheme]) => {
+        const headerClassNames = cx(styles.container, {
+          [styles.darkTheme]: theme === CONSTANTS.THEMES.DARK,
+          [styles.lightTheme]: theme === CONSTANTS.THEMES.LIGTH,
+          [styles.nightTheme]: theme === CONSTANTS.THEMES.NIGHT,
+        });
+        return (
+          <UserContext.Consumer>
+            {(userData) => (
+              <header className={headerClassNames}>
+                <h1>MY SITE</h1>
+                <img
+                  alt="user"
+                  style={{ height: '64px', width: '64px' }}
+                  src={userData.pictureSrc}
+                />
+                <select onChange={setTheme}>
+                  <option value={CONSTANTS.THEMES.LIGTH}>Light</option>
+                  <option selected value={CONSTANTS.THEMES.DARK}>Dark</option>
+                  <option value={CONSTANTS.THEMES.NIGHT}>Night</option>
+                </select>
+              </header>
+            )}
+          </UserContext.Consumer>
+        );
+      }}
+    </ThemeContext.Consumer>
   );
 };
 

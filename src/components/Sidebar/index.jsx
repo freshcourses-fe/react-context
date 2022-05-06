@@ -1,20 +1,29 @@
 import React from 'react';
-import { UserContext } from '../../contexts';
+import cx from 'classnames';
+import { UserContext, ThemeContext } from '../../contexts';
+import CONSTANTS from '../../constants';
+import styles from './Sidebar.module.scss';
+
 const Sidebar = () => {
   return (
-    <UserContext.Consumer>
-      {(user) => (
-        <article
-          style={{
-            maxWidth: '300px',
-            margin: '10px',
-            border: '5px solid gray',
-          }}
-        >
-          <h1>{`${user.firstName} ${user.lastName}`}</h1>
-        </article>
-      )}
-    </UserContext.Consumer>
+    <ThemeContext.Consumer>
+      {([theme]) => {
+        const sidebarClassNames = cx(styles.container, {
+          [styles.darkTheme]: theme === CONSTANTS.THEMES.DARK,
+          [styles.lightTheme]: theme === CONSTANTS.THEMES.LIGTH,
+          [styles.nightTheme]: theme === CONSTANTS.THEMES.NIGHT,
+        });
+        return (
+          <UserContext.Consumer>
+            {(user) => (
+              <article className={sidebarClassNames}>
+                <h1>{`${user.firstName} ${user.lastName}`}</h1>
+              </article>
+            )}
+          </UserContext.Consumer>
+        );
+      }}
+    </ThemeContext.Consumer>
   );
 };
 
