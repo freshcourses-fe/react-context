@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import CONSTANTS from './constants';
+import Calendar from './components/Calendar';
 
 /*
   1. создать контекст -  React.createContext
@@ -34,6 +35,7 @@ class App extends Component {
         <UserContext.Provider value={user}>
           <Header test={1234}/>
           <Sidebar />
+          <Calendar />
         </UserContext.Provider>
       </ThemeContext.Provider>
     );
