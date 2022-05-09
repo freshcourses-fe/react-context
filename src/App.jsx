@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <ThemeContext.Provider value={[theme, this.setTheme]}>
         <UserContext.Provider value={user}>
-          <Header />
+          <Header test={1234}/>
           <Sidebar />
         </UserContext.Provider>
       </ThemeContext.Provider>
